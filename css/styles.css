@@ -211,7 +211,7 @@ border-radius: 8px;
 #age-div {
   display: flex;
   flex-wrap: wrap;
-    gap: .5rem;
+    gap: .2rem;
     justify-content: flex-start;
     width: 90%;
   margin: 0 auto 1rem;
@@ -219,6 +219,7 @@ border-radius: 8px;
 #age-div button {
   font-size: .8rem;
   padding: 4px 6px;
+  width:55px;
 }
 .button-div {
   display: flex; 
