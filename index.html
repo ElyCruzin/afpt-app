@@ -57,9 +57,9 @@
         <li><a href="index.html" class="nav-link active" aria-current="page">PT calculator</a></li>
         <li><a href="hamr.html" class="nav-link">HAMR planner</a></li> 
         <li><a href="whtr.html" class="nav-link">WHtR check</a></li>
-        <li><a href="documents.html" class="nav-link">Documents</a></li> --->
-      </ul>
-      <span class="nav-badge">2026 standards</span>
+        <li><a href="documents.html" class="nav-link">Documents</a></li> 
+      </ul>--->
+      <span class="nav-badge">2026 Standards</span>
     </nav>
  </header>
     <!-- MAIN CONTENT -->
@@ -91,7 +91,7 @@
                 
                 <div class="cal-div"> 
                   <div class="comp-header">
-                    <h3 class="div-header">Aerobic Fitness</h3>
+                    <h3 >Aerobic Fitness</h3>
                     <div class="comp-right-text">
                     <span class="max-points">50 pts</span>
                     <label class="switch"><input type="checkbox" id="exempt-cardio"><span class="slider"></span></label>
@@ -100,23 +100,24 @@
                     </div>
                     <div id="cardio-div">
                       <div class="exempt-overlay hidden"></div>
-                    <div class="button-div">
+                    <div class="button-div" id="cardio-btns-div">
                         <button id="two-mile" class="active">2-mile run</button>
                         <button id="hamr">HAMR</button>
                         </div>
                         <div class="row-text-input">
-                        <label for="cardio-input" id="cardio-label">Run Time (mm:ss)</label>
-                        <div class="increment-div">
-                        <button class ="increment minus">-</button>
+                        <label for="cardio-input" id="cardio-label">Run Time</label>
+                        <div class="input-div">
                         <input class="ex-input" id="cardio-input" name="cardio-result" placeholder="mm:ss"/>
-                        <button class ="increment plus">+</button>
+                        <span class="input-error-msg hidden" id="cardio-input-error"></span>
                         </div>
                         <div class="min-max-div">
                           <div class="min-max-span">
                           <span id="cardio-min" class="min">Min</span>
                           <span id="cardio-max" class="max">Max</span>
                           </div>
-                          <div class="line-back"></div>
+                          <div class="line-back">
+                            <div class="line-fill" id="cardio-fill"></div>
+                          </div>
                         </div>
                         </div>
                         </div>
@@ -128,7 +129,7 @@
 
                 <div class="cal-div">   
                      <div class="comp-header">
-                    <h3 class="div-header">Muscular Strength</h3>
+                    <h3 >Muscular Strength</h3>
                     <div class="comp-right-text">
                     <span class="max-points">15 pts</span>
                     <label class="switch"><input type="checkbox" id="exempt-strength"><span class="slider"></span></label>
@@ -137,30 +138,31 @@
                     </div>
                     <div id="strength-div">
                     <div class="exempt-overlay hidden"></div>
-                    <div class="button-div">
+                    <div class="button-div" id="strength-btns-div">
                         <button id="push-ups" class="active">Push-ups</button>
                         <button id="hand-release">Hand release push-ups</button>
                         </div>
                         <div class="row-text-input">
                         <label  for="strength-input" id="strength-label">Reps in 1 min</label>
-                        <div class="increment-div">
-                        <button class ="increment minus">-</button>
+                        <div class="input-div">
                         <input class="ex-input" id="strength-input" name="strength-input" placeholder="reps"/>
-                        <button class ="increment plus">+</button>
+                        <span class="input-error-msg hidden" id="strength-input-error"></span>
                         </div>
                         <div class="min-max-div">
                           <div class="min-max-span">
                           <span id="strength-min" class="min">Min</span>
                           <span id="strength-max" class="max">Max</span>
                           </div>
-                          <div class="line-back"></div>
+                          <div class="line-back">
+                            <div class="line-fill" id="strength-fill"></div>
+                          </div>
                         </div>
                         </div>
                     </div>
                 </div>
                 <div class="cal-div">   
                      <div class="comp-header">
-                    <h3 class="div-header">Core Endurance</h3>
+                    <h3 >Core Endurance</h3>
                     <div class="comp-right-text">
                     <span class="max-points">15 pts</span>
                     <label class="switch"><input type="checkbox" id="exempt-core"><span class="slider"></span></label>
@@ -176,17 +178,18 @@
                         </div>
                         <div class="row-text-input">
                         <label for="endurace-result" id="core-label">Reps in 1 min</label>
-                        <div class="increment-div">
-                        <button class ="increment minus">-</button>
+                        <div class="input-div">
                         <input class="ex-input" id="core-input" name="endurance-result" placeholder="reps"/>
-                        <button class ="increment plus">+</button>
+                        <span class="input-error-msg hidden" id="core-input-error"></span>
                         </div>
                         <div class="min-max-div">
                           <div class="min-max-span">
                           <span id="core-min" class="min">Min</span>
                           <span id="core-max" class="max">Max</span>
                           </div>
-                          <div class="line-back"></div>
+                          <div class="line-back">
+                            <div class="line-fill" id="core-fill"></div>
+                          </div>
                         </div>
                     </div>
                     </div>
@@ -194,7 +197,7 @@
 
                 <div class="cal-div">   
                     <div class="comp-header">
-                    <h3 class="div-header">Body Composition (WHtR)</h3>
+                    <h3 >Body Composition (WHtR)</h3>
                     <div class="comp-right-text">
                     <span class="max-points">20 pts</span>
                     <label class="switch"><input type="checkbox" id="exempt-body-comp"><span class="slider"></span></label>
@@ -204,28 +207,32 @@
                         <div id="body-comp-grid">
                     <div class="exempt-overlay hidden"></div>
                           <div class="body-comp-input">
-                        <label for="waist">Waist (inches)</label>
-                        <input id="waist" name="waist" placeholder="waist"/>
+                        <label for="waist">Waist</label>
+                        <input id="waist" name="waist" placeholder="(inches)"/>
+                        <span class="input-error-msg hidden" id="waist-error"></span>
                         </div>
                         <div class="body-comp-input">
-                        <label for="height">Height (inches)</label>
-                        <input  id="height" name="height" placeholder="height"/>
+                        <label for="height">Height</label>
+                        <input id="height" name="height" placeholder="(inches)"/>
+                        <span class="input-error-msg hidden" id="height-error"></span>
                         </div>
                         <div class="min-max-div" id="body-min-max-div">
                           <div class="min-max-span">
                           <span id="body-comp-min" class="min">Min: .59</span>
                           <span id="body-comp-max" class="max">Max: .49</span>
                           </div>
-                          <div class="line-back"></div>
+                          <div class="line-back"><div class="line-fill" id="body-comp-fill"></div></div>
+                          
                         </div>
                     </div>
                 </div>
             </div>
             </div>
         <div id="right-div" class="hidden">
-            <h2 class="hero-eyebrow">Your Result</h2>
+            <h2 class="hero-eyebrow">Results</h2>
 
             <div class="total-score-div">
+              <div id="svg-div">
                  <svg class="score-svg" viewBox="0 0 100 100" width="120" height="120">
       <!-- background track -->
       <circle
@@ -247,6 +254,11 @@
         transform="rotate(-90 50 50)"
       />
     </svg><span id="score-points">-</span><span id="total-possible">/100</span>
+  </div>
+    <div id="composite-div">
+      <h3>Composite score</h3>
+      <p id="composite-score">-</p>
+    </div>
     </div>
             
             <div class="breakdown"><p>Cardio</p><p id="cardio">-</p></div>
@@ -258,8 +270,8 @@
  
     <!-- FOOTER -->
     <footer class="footer-bar" role="contentinfo">
-      <p class="footer-note">Not an official USAF product. Always verify with your unit fitness monitor.</p>
-      <p class="footer-note">AFI 36-2905 2026 standards</p>
+      <p class="footer-note">DAFMAN 36-2905 March 2026</p>
+      <p class="footer-note">Not an official USAF product. Always verify scores with your unit fitness monitor.</p>
     </footer>
  
     <!-- SCRIPTS -->
