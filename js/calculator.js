@@ -112,7 +112,7 @@ setupExempt(exemptBodyComp, "#body-comp-grid .exempt-overlay");
 const cardioConfig = {
   "two-mile": {
     exercise: "twoMile",
-    placeholder: "min:sec",
+    placeholder: "1800",
     label: "Run time",
   },
   hamr: { exercise: "hamr", placeholder: "reps", label: "HAMR shuttles" },

@@ -210,6 +210,7 @@ nav {
 #right-div {
   padding: 2rem 1rem 0;
   background-color: var(--color-background-darker);
+  height: 100vh;
 }
 
 .cal-div {
@@ -347,6 +348,7 @@ nav {
   text-transform: uppercase;
   color: var(--gray);
   font-size: 0.7rem;
+  margin: 8px 0;
 }
 
 .min {
@@ -500,7 +502,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 15px 20px 0;
+  margin: 15px 20px 20px;
 }
 
 #svg-div {
@@ -516,7 +518,7 @@ input:checked + .slider:before {
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
-  align-items: baseline;
+  flex-direction: row;
   gap: 1px;
   pointer-events: none;
   white-space: nowrap;
@@ -524,13 +526,20 @@ input:checked + .slider:before {
 
 #composite-div {
   align-content: center;
+  margin:20px;
 }
 
 #composite-div h3 {
   color: var(--gray);
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: .7em;
   margin: 0 0 2px;
+}
+#composite-score {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1;
 }
 
 #score-ring {
@@ -543,13 +552,15 @@ input:checked + .slider:before {
   font-size: 26px;
   font-weight: 600;
   color: var(--black);
-  line-height: 1;
+  margin-left:15px;
+  
 }
 
 #total-possible {
   font-size: 11px;
   color: var(--gray);
   margin-bottom: 2px;
+  padding-top: 20px;
 }
 
 #score-rating {
@@ -591,6 +602,7 @@ input:checked + .slider:before {
 .breakdown-left {
   display: flex;
   flex-direction: column;
+
   gap: 2px;
 }
 
@@ -670,6 +682,7 @@ footer {
   #left-div {
     grid-column: 1/2;
     gap: 1rem;
+    height: 100vh;
   }
 
   #right-div {
