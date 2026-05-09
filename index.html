@@ -177,7 +177,7 @@
                         <button id="plank">Plank</button>
                         </div>
                         <div class="row-text-input">
-                        <label for="endurace-result" id="core-label">Reps in 1 min</label>
+                        <label for="core-input" id="core-label">Reps in 1 min</label>
                         <div class="input-div">
                         <input class="ex-input" id="core-input" name="endurance-result" placeholder="reps"/>
                         <span class="input-error-msg hidden" id="core-input-error"></span>
@@ -247,24 +247,64 @@
         cx="50" cy="50" r="42"
         fill="none"
         stroke="#639922"
-        stroke-width="8"
+        stroke-width="4"
         stroke-linecap="round"
         stroke-dasharray="264"
         stroke-dashoffset="264"
         transform="rotate(-90 50 50)"
       />
-    </svg><span id="score-points">-</span><span id="total-possible">/100</span>
+    </svg>
+    <div id="ring-label">
+      <span id="score-points">-</span><span id="total-possible">/100</span>
+    </div>
   </div>
     <div id="composite-div">
       <h3>Composite score</h3>
       <p id="composite-score">-</p>
+      <p id="score-rating"></p>
     </div>
     </div>
             
-            <div class="breakdown"><p>Cardio</p><p id="cardio">-</p></div>
-            <div class="breakdown"><p>Strength</p><p id="strength">-</p></div>
-            <div class="breakdown"><p>Endurance</p><p id="endurance">-</p></div>
-            <div class="breakdown"><p>Body comp (WHtR)</p><p id="whtr">-</p></div>
+            <div class="breakdown">
+              <div class="breakdown-left">
+                <span class="breakdown-name">Aerobic Fitness</span>
+                <span class="breakdown-exercise" id="cardio-ex-label">2-Mile Run</span>
+              </div>
+              <div class="breakdown-right">
+                <span class="breakdown-status" id="cardio-status"></span>
+                <span class="breakdown-points" id="cardio">-</span>
+              </div>
+            </div>
+            <div class="breakdown">
+              <div class="breakdown-left">
+                <span class="breakdown-name">Muscular Strength</span>
+                <span class="breakdown-exercise" id="strength-ex-label">Push-ups</span>
+              </div>
+              <div class="breakdown-right">
+                <span class="breakdown-status" id="strength-status"></span>
+                <span class="breakdown-points" id="strength">-</span>
+              </div>
+            </div>
+            <div class="breakdown">
+              <div class="breakdown-left">
+                <span class="breakdown-name">Core Endurance</span>
+                <span class="breakdown-exercise" id="core-ex-label">Sit-ups</span>
+              </div>
+              <div class="breakdown-right">
+                <span class="breakdown-status" id="endurance-status"></span>
+                <span class="breakdown-points" id="endurance">-</span>
+              </div>
+            </div>
+            <div class="breakdown">
+              <div class="breakdown-left">
+                <span class="breakdown-name">Body Composition</span>
+                <span class="breakdown-exercise">WHtR</span>
+              </div>
+              <div class="breakdown-right">
+                <span class="breakdown-status" id="whtr-status"></span>
+                <span class="breakdown-points" id="whtr">-</span>
+              </div>
+            </div>
         </div>
     </main>
  

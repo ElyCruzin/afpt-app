@@ -1,17 +1,5 @@
 //* TO DO //
-//// fix bug: below min scores breaking and not populating
-//// Need to accumulate scores for total
-//// add in WHtR calculator
-//// implement exempt statuses
-//// maxPoints will need to be subtracted
-//// input validation w/regex
-//// add in options buttons on UI
-//* get UI animation on scores to work
-//// add in min and max calculations
 //* add in shuttle levels
-//* create excellent, satisfactory & unsatisfactory labels
-//// WHtR ratio UI
-//// redesign - MOBILE FIRST/RESPONSIVE
 
 // DOM refs — inputs
 const cardioInput   = document.getElementById("cardio-input");
@@ -122,6 +110,16 @@ const coreConfig = {
   "sit-ups":   { exercise: "sitUps",                placeholder: "reps",    label: "Reps in 1 min" },
   "cross-leg": { exercise: "crossLegReverseCrunch", placeholder: "reps",    label: "Reps in 2 min" },
   "plank":     { exercise: "plank",                 placeholder: "min:sec", label: "Plank Time" },
+};
+
+const exerciseDisplayNames = {
+  twoMile:               "2-Mile Run",
+  hamr:                  "HAMR",
+  pushUps:               "Push-ups",
+  handRelease:           "Hand Release Push-ups",
+  sitUps:                "Sit-ups",
+  crossLegReverseCrunch: "Reverse Crunch",
+  plank:                 "Plank",
 };
 
 document.getElementById("cardio-btns-div").addEventListener("click", (e) => {
@@ -337,15 +335,43 @@ function setMinMax() {
 
 function setScores() {
   const whtrEntered = heightInput.value.trim() && waistInput.value.trim();
+  const { gender, ageGroup: age, cardioExercise: cardioEx, strengthExercise: strengthEx, coreExercise: coreEx } = userProfile;
+  const table = scoreTable[gender][age];
 
-  document.getElementById("cardio").textContent    = exemptCardio.checked   ? "Exempt" : (cardioInput.value.trim()   ? userProfile.cardioPoints   : "-");
-  document.getElementById("strength").textContent  = exemptStrength.checked ? "Exempt" : (strengthInput.value.trim() ? userProfile.strengthPoints : "-");
-  document.getElementById("endurance").textContent = exemptCore.checked     ? "Exempt" : (coreInput.value.trim()     ? userProfile.corePoints     : "-");
-  document.getElementById("whtr").textContent      = exemptBodyComp.checked ? "Exempt" : (whtrEntered                ? userProfile.WHtRPoints     : "-");
+  // Update exercise subtitles in breakdown
+  document.getElementById('cardio-ex-label').textContent   = exerciseDisplayNames[cardioEx];
+  document.getElementById('strength-ex-label').textContent = exerciseDisplayNames[strengthEx];
+  document.getElementById('core-ex-label').textContent     = exerciseDisplayNames[coreEx];
+
+  // Compute per-component statuses
+  const cardioSt   = componentStatus(cardioInput,   userProfile.cardioScore,   table[cardioEx],   cardioEx === 'twoMile', exemptCardio.checked);
+  const strengthSt = componentStatus(strengthInput, userProfile.strengthScore, table[strengthEx], false,                  exemptStrength.checked);
+  const coreSt     = componentStatus(coreInput,     userProfile.coreScore,     table[coreEx],     false,                  exemptCore.checked);
+  const whtrSt     = exemptBodyComp.checked ? 'exempt'
+    : whtrEntered ? (Number(userProfile.WHtRScore) <= WHtRTable[WHtRTable.length - 1].threshold ? 'pass' : 'fail')
+    : null;
+
+  // Update breakdown rows
+  updateBreakdownRow('cardio',    'cardio-status',   userProfile.cardioPoints,   50, cardioSt,   cardioInput.value.trim());
+  updateBreakdownRow('strength',  'strength-status', userProfile.strengthPoints, 15, strengthSt, strengthInput.value.trim());
+  updateBreakdownRow('endurance', 'endurance-status',userProfile.corePoints,     15, coreSt,     coreInput.value.trim());
+  updateBreakdownRow('whtr',      'whtr-status',     userProfile.WHtRPoints,     20, whtrSt,     whtrEntered);
 
   const anyInputEntered = exemptCardio.checked || exemptStrength.checked || exemptCore.checked || exemptBodyComp.checked
     || cardioInput.value.trim() || strengthInput.value.trim() || coreInput.value.trim() || whtrEntered;
-  document.getElementById("score-points").textContent = anyInputEntered ? userProfile.totalPoints : "-";
+
+  if (anyInputEntered) {
+    const rawPoints = userProfile.cardioPoints + userProfile.strengthPoints + userProfile.corePoints + userProfile.WHtRPoints;
+    animateScoreRing(userProfile.totalPoints, rawPoints);
+  } else {
+    if (scoreAnimFrame) cancelAnimationFrame(scoreAnimFrame);
+    document.getElementById('score-points').textContent = '-';
+    document.getElementById('total-possible').textContent = '/100';
+    document.getElementById('composite-score').textContent = '-';
+    document.getElementById('score-rating').textContent = '';
+    document.getElementById('score-ring').style.strokeDashoffset = 264;
+    document.getElementById('score-ring').style.stroke = '#639922';
+  }
 
   setMinMax();
 }
@@ -353,45 +379,91 @@ function setScores() {
 // Populate min/max on page load with default profile (male, under25)
 setMinMax();
 
-function animateScoreRing(score) {
+// Returns 'exempt' | 'pass' | 'fail' | null (not entered)
+function componentStatus(inputEl, score, entries, lowerIsBetter, isExempt) {
+  if (isExempt) return 'exempt';
+  if (!inputEl.value.trim()) return null;
+  const minThreshold = entries[entries.length - 1].threshold;
+  return (lowerIsBetter ? score <= minThreshold : score >= minThreshold) ? 'pass' : 'fail';
+}
+
+function updateBreakdownRow(pointsId, statusId, earned, maxPts, status, hasValue) {
+  const pointsEl = document.getElementById(pointsId);
+  const statusEl = document.getElementById(statusId);
+  if (status === 'exempt') {
+    pointsEl.textContent = '-';
+    statusEl.textContent = 'Exempt';
+    statusEl.className = 'breakdown-status status-exempt';
+  } else if (!hasValue || status === null) {
+    pointsEl.textContent = '-';
+    statusEl.textContent = '';
+    statusEl.className = 'breakdown-status';
+  } else {
+    pointsEl.textContent = `${earned}/${maxPts}`;
+    statusEl.textContent = status === 'pass' ? 'Pass' : 'Fail';
+    statusEl.className = `breakdown-status status-${status}`;
+  }
+}
+
+function getScoreRating() {
+  const pct = userProfile.totalPoints;
+  const { gender, ageGroup: age, cardioExercise: cardioEx, strengthExercise: strengthEx, coreExercise: coreEx } = userProfile;
+  const table = scoreTable[gender][age];
+  const whtrEntered = heightInput.value.trim() && waistInput.value.trim();
+
+  const cardioSt   = componentStatus(cardioInput,   userProfile.cardioScore,   table[cardioEx],   cardioEx === 'twoMile', exemptCardio.checked);
+  const strengthSt = componentStatus(strengthInput, userProfile.strengthScore, table[strengthEx], false,                  exemptStrength.checked);
+  const coreSt     = componentStatus(coreInput,     userProfile.coreScore,     table[coreEx],     false,                  exemptCore.checked);
+  const whtrSt     = exemptBodyComp.checked ? 'exempt'
+    : whtrEntered ? (Number(userProfile.WHtRScore) <= WHtRTable[WHtRTable.length - 1].threshold ? 'pass' : 'fail')
+    : null;
+
+  const allPass = [cardioSt, strengthSt, coreSt, whtrSt].every(s => s !== 'fail');
+
+  if (pct >= 90 && allPass) return 'excellent';
+  if (pct >= 75 && allPass) return 'satisfactory';
+  return 'unsatisfactory';
+}
+
+let scoreAnimFrame = null;
+
+function animateScoreRing(percentage, rawPoints) {
   const circumference = 264;
   const ring = document.getElementById('score-ring');
+  const rating = getScoreRating();
 
-  // calculate how much of the ring to fill
-  const fillAmount = (totalPoints / maxPoints) * circumference;
-  const offset = circumference - fillAmount;
+  ring.style.strokeDashoffset = circumference - (percentage / 100) * circumference;
+  ring.style.stroke = rating === 'excellent' ? '#639922' : rating === 'satisfactory' ? '#989823' : '#e24b4a';
 
-  // set the offset — CSS transition handles the animation
-  ring.style.strokeDashoffset = offset;
+  animateNumber('score-points', rawPoints);
 
-  // change color based on score rating
-  if (totalPoints >= 90) {
-    ring.style.stroke = '#639922';      // green — excellent
-  } else if (totalPoints >= 75) {
-    ring.style.stroke = '#639922';      // green — satisfactory
-  }  else {
-    ring.style.stroke = '#e24b4a';      // red — unsatisfactory
-  }
+  document.getElementById('total-possible').textContent = '/' + getMaxPoints();
+  document.getElementById('composite-score').textContent = percentage;
 
-  // animate the number counting up
-  animateNumber('composite-score', score);
+  const ratingEl = document.getElementById('score-rating');
+  const labels = { excellent: 'Excellent', satisfactory: 'Satisfactory', unsatisfactory: 'Unsatisfactory' };
+  ratingEl.textContent = labels[rating];
+  ratingEl.className = rating === 'excellent' ? 'rating-excellent' : rating === 'satisfactory' ? 'rating-satisfactory' : 'rating-unsat';
 }
 
 function animateNumber(id, target) {
+  if (scoreAnimFrame) cancelAnimationFrame(scoreAnimFrame);
   const el = document.getElementById(id);
-  const duration = 1000; // ms
+  const startVal = parseInt(el.textContent, 10) || 0;
+  if (startVal === target) return;
+  const duration = 350;
   const start = performance.now();
-  const startVal = 0;
 
   function update(now) {
     const elapsed = now - start;
     const progress = Math.min(elapsed / duration, 1);
-    // ease out — slows down as it reaches target
     const eased = 1 - Math.pow(1 - progress, 3);
-    const current = startVal + (target - startVal) * eased;
-    el.textContent = current.toFixed(1);
-    if (progress < 1) requestAnimationFrame(update);
+    el.textContent = Math.round(startVal + (target - startVal) * eased);
+    if (progress < 1) {
+      scoreAnimFrame = requestAnimationFrame(update);
+    } else {
+      scoreAnimFrame = null;
+    }
   }
-
-  requestAnimationFrame(update);
-} 
+  scoreAnimFrame = requestAnimationFrame(update);
+}
