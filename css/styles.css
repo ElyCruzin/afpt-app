@@ -24,12 +24,17 @@
 
 html {
   background-color: var(--color-background);
+  
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
+  
+}
+main {
+  min-height: 80vh;
 }
 
 /* HIDDEN CLASS */
@@ -210,7 +215,6 @@ nav {
 #right-div {
   padding: 2rem 1rem 0;
   background-color: var(--color-background-darker);
-  height: 100vh;
 }
 
 .cal-div {
@@ -527,6 +531,11 @@ input:checked + .slider:before {
 #composite-div {
   align-content: center;
   margin:20px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 30%;
+  gap: 0;
+
 }
 
 #composite-div h3 {
@@ -534,12 +543,18 @@ input:checked + .slider:before {
   text-transform: uppercase;
   font-size: .7em;
   margin: 0 0 2px;
+  grid-row: 1/2;
+  grid-column: 1/3;
 }
 #composite-score {
   font-size: 1.5em;
   font-weight: 600;
   color: var(--black);
-  line-height: 1;
+  grid-row: 2/3;
+  grid-column: 1/2;
+  align-self: end;
+  justify-self: start;
+  padding-bottom: 12px;
 }
 
 #score-ring {
@@ -552,8 +567,6 @@ input:checked + .slider:before {
   font-size: 26px;
   font-weight: 600;
   color: var(--black);
-  margin-left:15px;
-  
 }
 
 #total-possible {
@@ -567,11 +580,14 @@ input:checked + .slider:before {
   font-size: 0.72rem;
   text-transform: capitalize;
   font-family: var(--font-sans);
-  padding: 4px 2px;
+  padding: 4px 8px;
   border-radius: 10px;
   text-align: center;
   font-weight: 600;
-  margin: 3px 0 0;
+  margin: 12px 0 8px;
+  grid-row: 1/3;
+  grid-column: 2/3;
+align-self: center;
 }
 
 .rating-excellent {
@@ -682,7 +698,6 @@ footer {
   #left-div {
     grid-column: 1/2;
     gap: 1rem;
-    height: 100vh;
   }
 
   #right-div {
