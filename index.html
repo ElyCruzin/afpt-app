@@ -3,13 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- 
     <!-- Primary meta -->
     <title>AFPTScore  — Air Force PT Calculator</title>
     <meta name="description" content="Calculate your Air Force PT score instantly using 2025 AFI 36-2905 standards. Includes HAMR level planner, waist-to-height ratio check, and official document library." />
     <meta name="author" content="Elisa Cruz" />
     <meta name="robots" content="index, follow" />
- 
     <!-- Open Graph (for link previews on Slack, LinkedIn, iMessage etc.) -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="AFPT Calculator — Air Force PT Score & HAMR Planner (2025)" />
@@ -17,303 +15,287 @@
     <meta property="og:url" content="https://yourdomain.com/" />
     <meta property="og:image" content="assets/logo.png" />
     <meta property="og:site_name" content="AFPTScore" />
- 
     <!-- Twitter / X card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="AFPT Calculator — Air Force PT Score & HAMR Planner (2025)" />
     <meta name="twitter:description" content="Calculate your Air Force PT score using 2025 AFI 36-2905 standards." />
     <meta name="twitter:image" content="assets/logo.png" />
- 
     <!-- Canonical URL (tells search engines this is the authoritative page) -->
     <link rel="canonical" href="https://yourdomain.com/" />
- 
     <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-<link rel="shortcut icon" href="assets/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="AFPTScore" />
-<link rel="manifest" href="assets/site.webmanifest" />
- 
+    <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="AFPTScore" />
+    <link rel="manifest" href="assets/site.webmanifest" />
     <!-- Theme color (colors the browser chrome on mobile) -->
     <meta name="theme-color" content="#1a3a6b" />
- 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/styles.css" />
   </head>
- 
   <body>
- <header>
-    <!-- NAV -->
-    <nav class="topnav" role="navigation" aria-label="Main navigation">
-      <div class="nav-brand">
-        <a href="index.html" aria-label="AFPT home" id="logo-link">
-          <img id="logo" src="assets/logo.png">
-          <h1 class="nav-title">AFPT<span class="nav-title-muted">Score</span></h1>
-          <p id="description">Air Force PT Calculator</p>
-        </a>
-      </div>
-     <!--  <ul class="nav-links" role="list">
-        <li><a href="index.html" class="nav-link active" aria-current="page">PT calculator</a></li>
-        <li><a href="hamr.html" class="nav-link">HAMR planner</a></li> 
-        <li><a href="whtr.html" class="nav-link">WHtR check</a></li>
-        <li><a href="documents.html" class="nav-link">Documents</a></li> 
-      </ul>--->
-      <span class="nav-badge">2026 Standards</span>
-    </nav>
- </header>
+    <header>
+      <!-- NAV -->
+      <nav class="topnav" role="navigation" aria-label="Main navigation">
+        <div class="nav-brand">
+          <a href="index.html" aria-label="AFPT home" id="logo-link">
+            <img id="logo" src="assets/logo.png">
+            <h1 class="nav-title">AFPT<span class="nav-title-muted">Score</span></h1>
+            <p id="description">Air Force PT Calculator</p>
+          </a>
+        </div>
+        <!--  <ul class="nav-links" role="list">
+          <li><a href="index.html" class="nav-link active" aria-current="page">PT calculator</a></li>
+          <li><a href="hamr.html" class="nav-link">HAMR planner</a></li> 
+          <li><a href="whtr.html" class="nav-link">WHtR check</a></li>
+          <li><a href="documents.html" class="nav-link">Documents</a></li> 
+          </ul>--->
+        <span class="nav-badge">2026 Standards</span>
+      </nav>
+    </header>
     <!-- MAIN CONTENT -->
     <main id="main-content">
-        <!-- MAIN DIVS -->
-        <div class="main-container">
-          <div id="mobile-tabs">
-          <button class="mobile-tab selected" id="tab-score">Enter Scores</button>
-          <button class="mobile-tab" id="tab-results">Results</button>
+      <!-- MAIN DIVS -->
+      <div class="main-container">
+      <div id="mobile-tabs">
+        <button class="mobile-tab selected" id="tab-score">Enter Scores</button>
+        <button class="mobile-tab" id="tab-results">Results</button>
+      </div>
+      <div id="left-div">
+        <div id="calculator-form">
+          <div id="gender-div">
+            <h2 class="hero-eyebrow">Profile</h2>
+            <button id="male" value="male" class="active">Male</button>
+            <button id="female" value="female">Female</button>
           </div>
-        <div id="left-div">
-            <div id="calculator-form">
-              <div id="gender-div">
-                <h2 class="hero-eyebrow">Profile</h2>
-                    <button id="male" value="male" class="active">Male</button>
-                    <button id="female" value="female">Female</button>
+          <div id="age-div">
+            <button id="under25" value="under25" class="active">&lt;25</button>
+            <button id="age25to29" value="age25to29">25-29</button>
+            <button id="age30to34" value="age30to34">30-34</button>
+            <button id="age35to39" value="age35to39">35-39</button>
+            <button id="age40to44" value="age40to44">40-44</button>
+            <button id="age45to49" value="age45to49">45-49</button>
+            <button id="age50to54" value="age50to54">50-54</button>
+            <button id="age55to59" value="age55to59">55-59</button>
+            <button id="over60" value="over60">60+</button>
+          </div>
+          <div class="cal-div">
+            <div class="comp-header">
+              <h3 >Aerobic Fitness</h3>
+              <div class="comp-right-text">
+                <span class="max-points">50 pts</span>
+                <label class="switch"><input type="checkbox" id="exempt-cardio"><span class="slider"></span></label>
+                <label for="exempt-cardio" class="exempt-label" id="cardio-exempt-label">Exempt</label>
+              </div>
+            </div>
+            <div id="cardio-div">
+              <div class="exempt-overlay hidden"></div>
+              <div class="button-div" id="cardio-btns-div">
+                <button id="two-mile" class="active">2-mile run</button>
+                <button id="hamr">HAMR</button>
+              </div>
+              <div class="row-text-input">
+                <label for="cardio-input" id="cardio-label">Run Time</label>
+                <div class="input-div">
+                  <input class="ex-input" id="cardio-input" name="cardio-result" placeholder="mm:ss"/>
+                  <span class="input-error-msg hidden" id="cardio-input-error"></span>
                 </div>
-                <div id="age-div">
-                    <button id="under25" value="under25" class="active">&lt;25</button>
-                    <button id="age25to29" value="age25to29">25-29</button>
-                    <button id="age30to34" value="age30to34">30-34</button>
-                    <button id="age35to39" value="age35to39">35-39</button>
-                    <button id="age40to44" value="age40to44">40-44</button>
-                    <button id="age45to49" value="age45to49">45-49</button>
-                    <button id="age50to54" value="age50to54">50-54</button>
-                    <button id="age55to59" value="age55to59">55-59</button>
-                    <button id="over60" value="over60">60+</button>
-                    </div>
-                
-                <div class="cal-div"> 
-                  <div class="comp-header">
-                    <h3 >Aerobic Fitness</h3>
-                    <div class="comp-right-text">
-                    <span class="max-points">50 pts</span>
-                    <label class="switch"><input type="checkbox" id="exempt-cardio"><span class="slider"></span></label>
-                    <label for="exempt-cardio" class="exempt-label" id="cardio-exempt-label">Exempt</label>
-                    </div>
-                    </div>
-                    <div id="cardio-div">
-                      <div class="exempt-overlay hidden"></div>
-                    <div class="button-div" id="cardio-btns-div">
-                        <button id="two-mile" class="active">2-mile run</button>
-                        <button id="hamr">HAMR</button>
-                        </div>
-                        <div class="row-text-input">
-                        <label for="cardio-input" id="cardio-label">Run Time</label>
-                        <div class="input-div">
-                        <input class="ex-input" id="cardio-input" name="cardio-result" placeholder="mm:ss"/>
-                        <span class="input-error-msg hidden" id="cardio-input-error"></span>
-                        </div>
-                        <div class="min-max-div">
-                          <div class="min-max-span">
-                          <span id="cardio-min" class="min">Min</span>
-                          <span id="cardio-max" class="max">Max</span>
-                          </div>
-                          <div class="line-back">
-                            <div class="line-fill" id="cardio-fill"></div>
-                          </div>
-                        </div>
-                        </div>
-                        </div>
-                        
-                       
-                        
-                       
+                <div class="min-max-div">
+                  <div class="min-max-span">
+                    <span id="cardio-min" class="min">Min</span>
+                    <span id="cardio-max" class="max">Max</span>
+                  </div>
+                  <div class="line-back">
+                    <div class="line-fill" id="cardio-fill"></div>
+                  </div>
                 </div>
-
-                <div class="cal-div">   
-                     <div class="comp-header">
-                    <h3 >Muscular Strength</h3>
-                    <div class="comp-right-text">
-                    <span class="max-points">15 pts</span>
-                    <label class="switch"><input type="checkbox" id="exempt-strength"><span class="slider"></span></label>
-                    <label for="exempt-strength" class="exempt-label">Exempt</label>
-                    </div>
-                    </div>
-                    <div id="strength-div">
-                    <div class="exempt-overlay hidden"></div>
-                    <div class="button-div" id="strength-btns-div">
-                        <button id="push-ups" class="active">Push-ups</button>
-                        <button id="hand-release">Hand release push-ups</button>
-                        </div>
-                        <div class="row-text-input">
-                        <label  for="strength-input" id="strength-label">Reps in 1 min</label>
-                        <div class="input-div">
-                        <input class="ex-input" id="strength-input" name="strength-input" placeholder="reps"/>
-                        <span class="input-error-msg hidden" id="strength-input-error"></span>
-                        </div>
-                        <div class="min-max-div">
-                          <div class="min-max-span">
-                          <span id="strength-min" class="min">Min</span>
-                          <span id="strength-max" class="max">Max</span>
-                          </div>
-                          <div class="line-back">
-                            <div class="line-fill" id="strength-fill"></div>
-                          </div>
-                        </div>
-                        </div>
-                    </div>
+              </div>
+            </div>
+          </div>
+          <div class="cal-div">
+            <div class="comp-header">
+              <h3 >Muscular Strength</h3>
+              <div class="comp-right-text">
+                <span class="max-points">15 pts</span>
+                <label class="switch"><input type="checkbox" id="exempt-strength"><span class="slider"></span></label>
+                <label for="exempt-strength" class="exempt-label">Exempt</label>
+              </div>
+            </div>
+            <div id="strength-div">
+              <div class="exempt-overlay hidden"></div>
+              <div class="button-div" id="strength-btns-div">
+                <button id="push-ups" class="active">Push-ups</button>
+                <button id="hand-release">Hand release push-ups</button>
+              </div>
+              <div class="row-text-input">
+                <label  for="strength-input" id="strength-label">Reps in 1 min</label>
+                <div class="input-div">
+                  <input class="ex-input" id="strength-input" name="strength-input" placeholder="reps"/>
+                  <span class="input-error-msg hidden" id="strength-input-error"></span>
                 </div>
-                <div class="cal-div">   
-                     <div class="comp-header">
-                    <h3 >Core Endurance</h3>
-                    <div class="comp-right-text">
-                    <span class="max-points">15 pts</span>
-                    <label class="switch"><input type="checkbox" id="exempt-core"><span class="slider"></span></label>
-                    <label for="exempt-core" class="exempt-label">Exempt</label>
-                    </div>
-                    </div>
-                    <div id="core-div">
-                    <div class="exempt-overlay hidden"></div>
-                    <div class="button-div" id="core-btns-div">
-                        <button id="sit-ups" class="active">Sit-ups</button>
-                        <button id="cross-leg">Reverse Crunch</button>
-                        <button id="plank">Plank</button>
-                        </div>
-                        <div class="row-text-input">
-                        <label for="core-input" id="core-label">Reps in 1 min</label>
-                        <div class="input-div">
-                        <input class="ex-input" id="core-input" name="endurance-result" placeholder="reps"/>
-                        <span class="input-error-msg hidden" id="core-input-error"></span>
-                        </div>
-                        <div class="min-max-div">
-                          <div class="min-max-span">
-                          <span id="core-min" class="min">Min</span>
-                          <span id="core-max" class="max">Max</span>
-                          </div>
-                          <div class="line-back">
-                            <div class="line-fill" id="core-fill"></div>
-                          </div>
-                        </div>
-                    </div>
-                    </div>
+                <div class="min-max-div">
+                  <div class="min-max-span">
+                    <span id="strength-min" class="min">Min</span>
+                    <span id="strength-max" class="max">Max</span>
+                  </div>
+                  <div class="line-back">
+                    <div class="line-fill" id="strength-fill"></div>
+                  </div>
                 </div>
-
-                <div class="cal-div">   
-                    <div class="comp-header">
-                    <h3 >Body Composition (WHtR)</h3>
-                    <div class="comp-right-text">
-                    <span class="max-points">20 pts</span>
-                    <label class="switch"><input type="checkbox" id="exempt-body-comp"><span class="slider"></span></label>
-                    <label for="exempt-cardio" class="exempt-label">Exempt</label>
-                    </div>
-                    </div>
-                        <div id="body-comp-grid">
-                    <div class="exempt-overlay hidden"></div>
-                          <div class="body-comp-input">
-                        <label for="waist">Waist</label>
-                        <input id="waist" name="waist" placeholder="(inches)"/>
-                        <span class="input-error-msg hidden" id="waist-error"></span>
-                        </div>
-                        <div class="body-comp-input">
-                        <label for="height">Height</label>
-                        <input id="height" name="height" placeholder="(inches)"/>
-                        <span class="input-error-msg hidden" id="height-error"></span>
-                        </div>
-                        <div class="min-max-div" id="body-min-max-div">
-                          <div class="min-max-span">
-                          <span id="body-comp-min" class="min">Min: .59</span>
-                          <span id="body-comp-max" class="max">Max: .49</span>
-                          </div>
-                          <div class="line-back"><div class="line-fill" id="body-comp-fill"></div></div>
-                          
-                        </div>
-                    </div>
+              </div>
+            </div>
+          </div>
+          <div class="cal-div">
+            <div class="comp-header">
+              <h3 >Core Endurance</h3>
+              <div class="comp-right-text">
+                <span class="max-points">15 pts</span>
+                <label class="switch"><input type="checkbox" id="exempt-core"><span class="slider"></span></label>
+                <label for="exempt-core" class="exempt-label">Exempt</label>
+              </div>
+            </div>
+            <div id="core-div">
+              <div class="exempt-overlay hidden"></div>
+              <div class="button-div" id="core-btns-div">
+                <button id="sit-ups" class="active">Sit-ups</button>
+                <button id="cross-leg">Reverse Crunch</button>
+                <button id="plank">Plank</button>
+              </div>
+              <div class="row-text-input">
+                <label for="core-input" id="core-label">Reps in 1 min</label>
+                <div class="input-div">
+                  <input class="ex-input" id="core-input" name="endurance-result" placeholder="reps"/>
+                  <span class="input-error-msg hidden" id="core-input-error"></span>
                 </div>
-            </div>
-            </div>
-        <div id="right-div" class="hidden">
-            <h2 class="hero-eyebrow">Results</h2>
-
-            <div class="total-score-div">
-              <div id="svg-div">
-                 <svg class="score-svg" viewBox="0 0 100 100" width="120" height="120">
-      <!-- background track -->
-      <circle
-        cx="50" cy="50" r="42"
-        fill="none"
-        stroke="#e5e7eb"
-        stroke-width="2"
-      />
-      <!-- animated fill ring -->
-      <circle
-        id="score-ring"
-        cx="50" cy="50" r="42"
-        fill="none"
-        stroke="#639922"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-dasharray="264"
-        stroke-dashoffset="264"
-        transform="rotate(-90 50 50)"
-      />
-    </svg>
-    <div id="ring-label">
-      <span id="score-points">-</span><span id="total-possible">/100</span>
-    </div>
-  </div>
-    <div id="composite-div">
-      <h3>Composite score</h3>
-      <p id="composite-score">-</p>
-      <p id="score-rating"></p>
-    </div>
-    </div>
-            
-            <div class="breakdown">
-              <div class="breakdown-left">
-                <span class="breakdown-name">Aerobic Fitness</span>
-                <span class="breakdown-exercise" id="cardio-ex-label">2-Mile Run</span>
-              </div>
-              <div class="breakdown-right">
-                <span class="breakdown-status" id="cardio-status"></span>
-                <span class="breakdown-points" id="cardio">-</span>
+                <div class="min-max-div">
+                  <div class="min-max-span">
+                    <span id="core-min" class="min">Min</span>
+                    <span id="core-max" class="max">Max</span>
+                  </div>
+                  <div class="line-back">
+                    <div class="line-fill" id="core-fill"></div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="breakdown">
-              <div class="breakdown-left">
-                <span class="breakdown-name">Muscular Strength</span>
-                <span class="breakdown-exercise" id="strength-ex-label">Push-ups</span>
-              </div>
-              <div class="breakdown-right">
-                <span class="breakdown-status" id="strength-status"></span>
-                <span class="breakdown-points" id="strength">-</span>
-              </div>
-            </div>
-            <div class="breakdown">
-              <div class="breakdown-left">
-                <span class="breakdown-name">Core Endurance</span>
-                <span class="breakdown-exercise" id="core-ex-label">Sit-ups</span>
-              </div>
-              <div class="breakdown-right">
-                <span class="breakdown-status" id="endurance-status"></span>
-                <span class="breakdown-points" id="endurance">-</span>
+          </div>
+          <div class="cal-div">
+            <div class="comp-header">
+              <h3 >Body Composition (WHtR)</h3>
+              <div class="comp-right-text">
+                <span class="max-points">20 pts</span>
+                <label class="switch"><input type="checkbox" id="exempt-body-comp"><span class="slider"></span></label>
+                <label for="exempt-cardio" class="exempt-label">Exempt</label>
               </div>
             </div>
-            <div class="breakdown">
-              <div class="breakdown-left">
-                <span class="breakdown-name">Body Composition</span>
-                <span class="breakdown-exercise">WHtR</span>
+            <div id="body-comp-grid">
+              <div class="exempt-overlay hidden"></div>
+              <div class="body-comp-input">
+                <label for="waist">Waist</label>
+                <input id="waist" name="waist" placeholder="(inches)"/>
+                <span class="input-error-msg hidden" id="waist-error"></span>
               </div>
-              <div class="breakdown-right">
-                <span class="breakdown-status" id="whtr-status"></span>
-                <span class="breakdown-points" id="whtr">-</span>
+              <div class="body-comp-input">
+                <label for="height">Height</label>
+                <input id="height" name="height" placeholder="(inches)"/>
+                <span class="input-error-msg hidden" id="height-error"></span>
+              </div>
+              <div class="min-max-div" id="body-min-max-div">
+                <div class="min-max-span">
+                  <span id="body-comp-min" class="min">Min: .59</span>
+                  <span id="body-comp-max" class="max">Max: .49</span>
+                </div>
+                <div class="line-back">
+                  <div class="line-fill" id="body-comp-fill"></div>
+                </div>
               </div>
             </div>
+          </div>
         </div>
+      </div>
+      <div id="right-div" class="hidden">
+        <h2 class="hero-eyebrow">Results</h2>
+        <div class="total-score-div">
+          <div id="svg-div">
+            <svg class="score-svg" viewBox="0 0 100 100" width="120" height="120">
+              <!-- background track -->
+              <circle
+                cx="50" cy="50" r="42"
+                fill="none"
+                stroke="#e5e7eb"
+                stroke-width="2"
+                />
+              <!-- animated fill ring -->
+              <circle
+                id="score-ring"
+                cx="50" cy="50" r="42"
+                fill="none"
+                stroke="#639922"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-dasharray="264"
+                stroke-dashoffset="264"
+                transform="rotate(-90 50 50)"
+                />
+            </svg>
+            <div id="ring-label">
+              <span id="score-points">-</span><span id="total-possible">/100</span>
+            </div>
+          </div>
+          <div id="composite-div">
+            <h3>Composite score</h3>
+            <p id="composite-score">-</p>
+            <p id="score-rating"></p>
+          </div>
+        </div>
+        <div class="breakdown">
+          <div class="breakdown-left">
+            <span class="breakdown-name">Aerobic Fitness</span>
+            <span class="breakdown-exercise" id="cardio-ex-label">2-Mile Run</span>
+          </div>
+          <div class="breakdown-right">
+            <span class="breakdown-status" id="cardio-status"></span>
+            <span class="breakdown-points" id="cardio">-</span>
+          </div>
+        </div>
+        <div class="breakdown">
+          <div class="breakdown-left">
+            <span class="breakdown-name">Muscular Strength</span>
+            <span class="breakdown-exercise" id="strength-ex-label">Push-ups</span>
+          </div>
+          <div class="breakdown-right">
+            <span class="breakdown-status" id="strength-status"></span>
+            <span class="breakdown-points" id="strength">-</span>
+          </div>
+        </div>
+        <div class="breakdown">
+          <div class="breakdown-left">
+            <span class="breakdown-name">Core Endurance</span>
+            <span class="breakdown-exercise" id="core-ex-label">Sit-ups</span>
+          </div>
+          <div class="breakdown-right">
+            <span class="breakdown-status" id="endurance-status"></span>
+            <span class="breakdown-points" id="endurance">-</span>
+          </div>
+        </div>
+        <div class="breakdown">
+          <div class="breakdown-left">
+            <span class="breakdown-name">Body Composition</span>
+            <span class="breakdown-exercise">WHtR</span>
+          </div>
+          <div class="breakdown-right">
+            <span class="breakdown-status" id="whtr-status"></span>
+            <span class="breakdown-points" id="whtr">-</span>
+          </div>
+        </div>
+      </div>
     </main>
- 
     <!-- FOOTER -->
     <footer class="footer-bar" role="contentinfo">
       <p class="footer-note">DAFMAN 36-2905 March 2026</p>
       <p class="footer-note">Not an official USAF product. Always verify scores with your unit fitness monitor.</p>
     </footer>
- 
     <!-- SCRIPTS -->
     <script src="js/data.js"></script>
     <script src="js/calculator.js"></script>
